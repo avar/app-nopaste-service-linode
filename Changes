@@ -2,4 +2,8 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
+    - Fix some Dist::Zilla issues
+
+0.01 2010-03-05 13:14:09
+
     - Initial release to CPAN
