@@ -2,6 +2,10 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
+    - Don't use the Dist::Zilla Git plugins, they fail
+
+0.02 2010-03-05 13:19:57
+
     - Fix some Dist::Zilla issues
 
 0.01 2010-03-05 13:14:09
