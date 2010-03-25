@@ -2,6 +2,9 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
+    - App-Nopaste-Service-AnyPastebin solved RT#55257. This makes my
+      code a lot simpler.
+
 0.05 2010-03-05 14:05:48
 
     - 0.04 but with updated Changes

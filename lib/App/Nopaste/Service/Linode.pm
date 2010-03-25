@@ -16,42 +16,16 @@ sub get {
     return $self->SUPER::get($mech => %args);
 }
 
-sub fill_form {
-    my $self = shift;
-    my $mech = shift;
-    my %args = @_;
+sub post_content {
+    my ($self, %args) = @_;
 
-    ## Everything past this point could be replaced by this if
-    ## App::Nopaste::Service::AnyPastebin allowed me to customize the
-    ## code2 paramater to code2z
-    #$self->SUPER::fill_form($mech, %args);
-    
-    my $header = {
-        'User-Agent' => 'Mozilla/5.0',
-        'Content-Type' => 'application/x-www-form-urlencoded'
-    };
-    
-    my $content = {
-        paste => 'Send',
-        code2z => $args{text},
-        poster => exists($args{nick})? $args{nick} : '',
-        format => exists($self->FORMATS->{$args{lang}})? $args{lang} : 'text',
-        expiry => 'd'
-    };
-    
-    $mech->agent_alias('Linux Mozilla');
-    my $form = $mech->form_name('editor') || return;
-    
-    # do not follow redirect please
-    @{$mech->requests_redirectable} = ();
-    
-    my $paste = HTML::Form::Input->new(
-        type => 'text',
-        value => 'Send',
-        name => 'paste'
-    )->add_to_form($form);
-    
-    return $mech->submit_form( form_name => 'editor', fields => $content );
+    my $content = $self->SUPER::post_content(%args);
+
+    # On p.linode.com the code2 parameter is called code2z for some
+    # reason.
+    $content->{code2z} = delete $content->{code2};
+
+    return $content;
 }
 
 =head1 NAME
